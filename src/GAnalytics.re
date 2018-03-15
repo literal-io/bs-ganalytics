@@ -5,6 +5,19 @@ type t;
 [@bs.deriving jsConverter]
 type eventType = [ | [@bs.as "event"] `Event | [@bs.as "pageview"] `Pageview];
 
+type options = {
+  .
+  "ec": Js.undefined(string),
+  "ea": Js.undefined(string),
+  "ev": Js.undefined(string),
+  "el": Js.undefined(string),
+  "dt": Js.undefined(string),
+  "dl": Js.undefined(string),
+  "dh": Js.undefined(string),
+  "dp": Js.undefined(string),
+  "uid": Js.undefined(string)
+};
+
 [@bs.obj]
 external makeOptions :
   (
@@ -16,11 +29,12 @@ external makeOptions :
     ~dl: string=?, /* document url */
     ~dh: string=?, /* document host */
     ~dp: string=?, /* document path */
+    ~uid: string=?, /* user id */
     unit
   ) =>
-  _ =
+  options =
   "";
 
-[@bs.send.pipe : t] external send : (string, {..}) => unit = "";
+[@bs.send.pipe : t] external send : (string, options) => unit = "";
 
 let send = (eventType, opts) => send(eventTypeToJs(eventType), opts);
