@@ -1,6 +1,8 @@
-# Basic Reason Template
+# Basic Reason Templa
 
-Hello! This project allows you to quickly get started with Reason and BuckleScript. If you wanted a more sophisticated version, try the `react` template (`bsb -theme react -init .`).
+BuckleScript bindings to [lukeed/ganalytics](https://github.com/lukeed/ganalytics)
+
+Status: Event and Pageview types are functionally complete. Types could use refinement to enforce API constraints.
 
 # Build
 ```

@@ -7,7 +7,9 @@
     "clean": "bsb -clean-world"
   },
   "keywords": [
-    "BuckleScript"
+    "BuckleScript",
+    "GAnalytics",
+    "analytics"
   ],
   "author": "",
   "license": "MIT",
