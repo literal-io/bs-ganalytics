@@ -1,5 +1,4 @@
-# Basic Reason Templa
-
+# bs-ganalytics
 BuckleScript bindings to [lukeed/ganalytics](https://github.com/lukeed/ganalytics).
 
 Status: Event and Pageview types are functionally complete. Types could use refinement to enforce API constraints.
