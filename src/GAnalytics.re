@@ -1,6 +1,6 @@
 type t;
 
-[@bs.new] external make : string => t = "GAnalytics";
+[@bs.new] [@bs.module "ganalytics"] external make : string => t = "default";
 
 [@bs.deriving jsConverter]
 type eventType = [ | [@bs.as "event"] `Event | [@bs.as "pageview"] `Pageview];
