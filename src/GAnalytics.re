@@ -15,7 +15,9 @@ type options = {
   "dl": Js.undefined(string),
   "dh": Js.undefined(string),
   "dp": Js.undefined(string),
-  "uid": Js.undefined(string)
+  "uid": Js.undefined(string),
+  "an": Js.undefined(string),
+  "aid": Js.undefined(string)
 };
 
 [@bs.obj]
@@ -30,6 +32,8 @@ external makeOptions :
     ~dh: string=?, /* document host */
     ~dp: string=?, /* document path */
     ~uid: string=?, /* user id */
+    ~an: string=?, /* application name */
+    ~aid: string=?, /* application id */
     unit
   ) =>
   options =
