@@ -1,46 +1,55 @@
 type t;
 
-[@bs.new] [@bs.module "ganalytics"] external make : string => t = "default";
+[@bs.deriving abstract]
+type instOptions = {
+  [@bs.optional]
+  aip: string, /* anonymize ip */
+  [@bs.optional]
+  an: string, /* application name */
+  [@bs.optional]
+  aid: string, /* application identifier */
+  [@bs.optional]
+  aiid: string, /* application installer identifier */
+  [@bs.optional]
+  av: string, /* application version */
+  [@bs.optional]
+  ds: string /* data source */
+};
+
+[@bs.new] [@bs.module "ganalytics"]
+external make: (string, Js.Nullable.t(instOptions), bool) => t = "default";
 
 [@bs.deriving jsConverter]
 type eventType = [ | [@bs.as "event"] `Event | [@bs.as "pageview"] `Pageview];
 
-type options = {
-  .
-  "ec": Js.undefined(string),
-  "ea": Js.undefined(string),
-  "ev": Js.undefined(string),
-  "el": Js.undefined(string),
-  "dt": Js.undefined(string),
-  "dl": Js.undefined(string),
-  "dh": Js.undefined(string),
-  "dp": Js.undefined(string),
-  "uid": Js.undefined(string),
-  "an": Js.undefined(string),
-  "aid": Js.undefined(string),
-  "av": Js.undefined(string)
+[@bs.deriving abstract]
+type eventOptions = {
+  [@bs.optional]
+  ec: string, /* event category */
+  [@bs.optional]
+  ea: string, /* event action */
+  [@bs.optional]
+  ev: string, /* event label */
+  [@bs.optional]
+  el: string, /* event value */
+  [@bs.optional]
+  dt: string, /* document title */
+  [@bs.optional]
+  dl: string, /* document url */
+  [@bs.optional]
+  dh: string, /* document host */
+  [@bs.optional]
+  dp: string, /* document path */
+  [@bs.optional]
+  uid: string, /* user id */
+  [@bs.optional]
+  an: string, /* application name */
+  [@bs.optional]
+  aid: string, /* application id */
+  [@bs.optional]
+  av: string /* application version */
 };
 
-[@bs.obj]
-external makeOptions :
-  (
-    ~ec: string=?, /* event category */
-    ~ea: string=?, /* event action */
-    ~el: string=?, /* event label */
-    ~ev: string=?, /* event value */
-    ~dt: string=?, /* document title */
-    ~dl: string=?, /* document url */
-    ~dh: string=?, /* document host */
-    ~dp: string=?, /* document path */
-    ~uid: string=?, /* user id */
-    ~an: string=?, /* application name */
-    ~aid: string=?, /* application id */
-    ~av: string=?, /* application version */
-    unit
-  ) =>
-  options =
-  "";
-
-[@bs.send.pipe : t] external send : (string, options) => unit = "";
+[@bs.send.pipe: t] external send: (string, eventOptions) => unit = "";
 
 let send = (eventType, opts) => send(eventTypeToJs(eventType), opts);
