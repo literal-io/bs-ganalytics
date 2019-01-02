@@ -16,7 +16,7 @@ type instOptions = {
   ds: string /* data source */
 };
 
-[@bs.new] [@bs.module "ganalytics"]
+[@bs.val] [@bs.module "ganalytics"]
 external make: (string, Js.Nullable.t(instOptions), bool) => t = "default";
 
 [@bs.deriving jsConverter]
